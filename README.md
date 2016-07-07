@@ -5,7 +5,10 @@ Build the library with
 ```
  $ ant release
 ```
-Copy bin/classes.jar to *path/to/your/project/lib/android-preferences.jar*
+In order to use it within your (ant) project add this line to the *project.properties*
+```
+android.library.reference.1=path/to/android-preferences
+```
 
 ## VersionPreference
 ### Usage
