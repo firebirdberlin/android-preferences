@@ -182,11 +182,11 @@ public class TimeRangePreference extends Preference {
         startTime = new SimpleTime(startInMillis);
         endTime = new SimpleTime(endInMillis);
 
-        setTitle(getTitle());
+        setSummary(getSummary());
     }
 
     @Override
-    public CharSequence getTitle() {
+    public CharSequence getSummary() {
         if (startTime == null || endTime == null) {
             return null;
         }
