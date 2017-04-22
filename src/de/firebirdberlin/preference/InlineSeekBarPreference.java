@@ -30,6 +30,10 @@ public class InlineSeekBarPreference extends Preference implements OnSeekBarChan
     private TextView unitsRightView;
     private TextView unitsLeftView;
 
+    public InlineSeekBarPreference(Context context) {
+        super(context);
+    }
+
     public InlineSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setValuesFromXml(attrs);
@@ -168,6 +172,15 @@ public class InlineSeekBarPreference extends Preference implements OnSeekBarChan
     public void setSecondaryProgress(int value){
         if (seekBar != null) {
             seekBar.setSecondaryProgress(value);
+            seekBar.invalidate();
+        }
+    }
+
+    public void setRange(int min, int max) {
+        this.minValue = min;
+        this.maxValue = max;
+        if (seekBar != null) {
+            seekBar.setMax(max - min);
             seekBar.invalidate();
         }
     }
