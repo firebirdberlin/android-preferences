@@ -31,6 +31,15 @@ public class TimeRangePreference extends Preference {
             min = calendar.get(Calendar.MINUTE);
         }
 
+        public SimpleTime(int minutes){
+            this.hour = minutes / 60;
+            this.min = minutes % 60;
+        }
+
+        public int toMinutes() {
+            return this.hour * 60 + this.min;
+        }
+
         public long getMillis() {
             return getCalendar().getTimeInMillis();
         }
@@ -60,6 +69,8 @@ public class TimeRangePreference extends Preference {
     private SimpleTime endTime;
     private String keyStart;
     private String keyEnd;
+    private String keyStartInMinutes;
+    private String keyEndInMinutes;
 
 
     public TimeRangePreference(Context ctxt) {
@@ -104,6 +115,9 @@ public class TimeRangePreference extends Preference {
 
         keyStart = getKey() + key_suffix_start;
         keyEnd = getKey() + key_suffix_end;
+
+        keyStartInMinutes = getKey() + key_suffix_start + "_minutes";
+        keyEndInMinutes = getKey() + key_suffix_end + "_minutes";
     }
 
     private static String getAttributeStringValue(AttributeSet attrs, String namespace,
@@ -162,8 +176,8 @@ public class TimeRangePreference extends Preference {
         if (callChangeListener(time.getMillis())) {
             SharedPreferences sharedPreferences = getSharedPreferences();
             SharedPreferences.Editor prefEditor = sharedPreferences.edit();
-            prefEditor.putLong(keyStart, startTime.getMillis());
-            prefEditor.putLong(keyEnd, endTime.getMillis());
+            prefEditor.putInt(keyStartInMinutes, startTime.toMinutes());
+            prefEditor.putInt(keyEndInMinutes, endTime.toMinutes());
             prefEditor.commit();
             notifyChanged();
         }
@@ -176,12 +190,19 @@ public class TimeRangePreference extends Preference {
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
         SharedPreferences sharedPreferences = getSharedPreferences();
-        long startInMillis = sharedPreferences.getLong(keyStart, -1L);
-        long endInMillis = sharedPreferences.getLong(keyEnd, -1L);
+        int startInMinutes = sharedPreferences.getInt(keyStartInMinutes, -1);
+        int endInMinutes = sharedPreferences.getInt(keyEndInMinutes, -1);
 
-        startTime = new SimpleTime(startInMillis);
-        endTime = new SimpleTime(endInMillis);
+        if (startInMinutes > -1 && endInMinutes > -1) {
+            startTime = new SimpleTime(startInMinutes);
+            endTime = new SimpleTime(endInMinutes);
+        } else {
+            long startInMillis = sharedPreferences.getLong(keyStart, -1L);
+            long endInMillis = sharedPreferences.getLong(keyEnd, -1L);
 
+            startTime = new SimpleTime(startInMillis);
+            endTime = new SimpleTime(endInMillis);
+        }
         setSummary(getSummary());
     }
 
