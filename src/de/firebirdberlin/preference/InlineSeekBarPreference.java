@@ -71,14 +71,14 @@ public class InlineSeekBarPreference extends Preference implements OnSeekBarChan
                 ViewGroup summaryParent2 = (ViewGroup) summaryParent;
                 layoutInflater.inflate(R.layout.inline_seekbar_preference, summaryParent2);
 
-                seekBar = (SeekBar) summaryParent2.findViewById(R.id.seekBar);
+                seekBar = summaryParent2.findViewById(R.id.seekBar);
                 seekBar.setMax(maxValue - minValue);
                 seekBar.setOnSeekBarChangeListener(this);
 
-                statusText = (TextView) summaryParent2.findViewById(R.id.seekBarPrefValue);
+                statusText = summaryParent2.findViewById(R.id.seekBarPrefValue);
 
-                unitsRightView = (TextView) summaryParent2.findViewById(R.id.seekBarPrefUnitsRight);
-                unitsLeftView = (TextView) summaryParent2.findViewById(R.id.seekBarPrefUnitsLeft);
+                unitsRightView = summaryParent2.findViewById(R.id.seekBarPrefUnitsRight);
+                unitsLeftView = summaryParent2.findViewById(R.id.seekBarPrefUnitsLeft);
             }
         }
 

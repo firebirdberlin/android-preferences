@@ -163,6 +163,6 @@ public class SeekBarPreference extends DialogPreference
             callChangeListener(Integer.valueOf(mSeekBar.getProgress()));
         }
 
-        ((AlertDialog) getDialog()).dismiss();
+        getDialog().dismiss();
     }
 }

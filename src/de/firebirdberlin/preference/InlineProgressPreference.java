@@ -36,7 +36,7 @@ public class InlineProgressPreference extends Preference {
                 ViewGroup summaryParent2 = (ViewGroup) summaryParent;
                 layoutInflater.inflate(R.layout.inline_progressbar_preference, summaryParent2);
 
-                progressBar = (ProgressBar) summaryParent2.findViewById(R.id.progressBar);
+                progressBar = summaryParent2.findViewById(R.id.progressBar);
             }
         }
 
