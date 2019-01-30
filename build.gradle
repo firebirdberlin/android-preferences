@@ -14,11 +14,12 @@ buildscript {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation fileTree(include: '*.jar', dir: 'libs')
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     sourceSets {
         main {
