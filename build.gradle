@@ -3,9 +3,6 @@ apply plugin: 'com.android.library'
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
         google()
     }
     dependencies {
@@ -45,6 +42,6 @@ android {
         release.setRoot('build-types/release')
     }
     defaultConfig {
-        minSdkVersion = 9
+        minSdkVersion 9
     }
 }
