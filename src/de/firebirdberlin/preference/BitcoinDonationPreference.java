@@ -4,21 +4,23 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.preference.Preference;
 import android.util.AttributeSet;
-import android.view.View;
+
+import androidx.preference.Preference;
 
 public class BitcoinDonationPreference extends Preference {
     private static final String attr_namespace = "bitcoindonation";
     private String bitcoinAddress = "1Ek8CxQeM7aoTNVunfL2jNjkiLa6cZqF3b";
-    private Context context = null;
+    private Context context;
 
     public BitcoinDonationPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         this.context = context;
-        bitcoinAddress = getAttributeStringValue(attrs, attr_namespace, "bitcoinAddress",
-                bitcoinAddress);
+        bitcoinAddress =
+                getAttributeStringValue(
+                        attrs, attr_namespace, "bitcoinAddress", bitcoinAddress
+                );
     }
 
     @Override
@@ -46,8 +48,9 @@ public class BitcoinDonationPreference extends Preference {
         }
     }
 
-    private static String getAttributeStringValue(AttributeSet attrs, String namespace,
-            String name, String defaultValue) {
+    private static String getAttributeStringValue(
+            AttributeSet attrs, String namespace, String name, String defaultValue
+    ) {
         String value = attrs.getAttributeValue(namespace, name);
         if (value == null) value = defaultValue;
 

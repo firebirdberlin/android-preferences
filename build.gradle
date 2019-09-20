@@ -12,6 +12,8 @@ buildscript {
 
 dependencies {
     implementation fileTree(include: '*.jar', dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.preference:preference:1.0.0'
 }
 
 android {
@@ -42,6 +44,6 @@ android {
         release.setRoot('build-types/release')
     }
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
     }
 }

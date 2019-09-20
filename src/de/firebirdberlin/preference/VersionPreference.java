@@ -3,9 +3,9 @@ package de.firebirdberlin.preference;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.preference.Preference;
 import android.util.AttributeSet;
-import android.view.View;
+
+import androidx.preference.Preference;
 
 public class VersionPreference extends Preference {
 
