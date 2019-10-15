@@ -27,6 +27,9 @@ public class AndroidPreferencesPreference extends Preference {
             case "Sound":
                 intent = new Intent(Settings.ACTION_SOUND_SETTINGS);
                 break;
+            case "TTS":
+                intent = new Intent("com.android.settings.TTS_SETTINGS");
+                break;
             default:
                 throw new IllegalArgumentException("not implemented");
 
