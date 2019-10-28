@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:tag="custom"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@android:id/summary">
 
@@ -25,11 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <SeekBar
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seekBar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seekBarPrefUnitsRight"/>
 

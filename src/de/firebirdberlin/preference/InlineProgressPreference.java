@@ -1,13 +1,15 @@
 package de.firebirdberlin.preference;
 
 import android.content.Context;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ProgressBar;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class InlineProgressPreference extends Preference {
     private static final String ANDROIDNS = "http://schemas.android.com/apk/res/android";
@@ -24,8 +26,10 @@ public class InlineProgressPreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        View ret = super.onCreateView(parent);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        super.onBindViewHolder(holder);
+        View ret = holder.itemView;
 
         View summary = ret.findViewById(android.R.id.summary);
         if (summary != null) {
@@ -39,8 +43,6 @@ public class InlineProgressPreference extends Preference {
                 progressBar = summaryParent2.findViewById(R.id.progressBar);
             }
         }
-
-        return ret;
     }
 
     public void setProgress(int value){

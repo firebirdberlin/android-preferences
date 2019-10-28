@@ -7,10 +7,13 @@ import android.content.res.TypedArray;
 import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.Preference;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.widget.TimePicker;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -120,6 +123,12 @@ public class TimeRangePreference extends Preference {
         keyEndInMinutes = getKey() + key_suffix_end + "_minutes";
     }
 
+    @Override
+    protected void onAttachedToHierarchy(PreferenceManager preferenceManager) {
+        super.onAttachedToHierarchy(preferenceManager);
+        setSummary(getSummary());
+    }
+
     private static String getAttributeStringValue(AttributeSet attrs, String namespace,
                                                   String name, String defaultValue) {
         String value = attrs.getAttributeValue(namespace, name);
@@ -178,7 +187,7 @@ public class TimeRangePreference extends Preference {
             SharedPreferences.Editor prefEditor = sharedPreferences.edit();
             prefEditor.putInt(keyStartInMinutes, startTime.toMinutes());
             prefEditor.putInt(keyEndInMinutes, endTime.toMinutes());
-            prefEditor.commit();
+            prefEditor.apply();
             notifyChanged();
         }
     }
@@ -188,7 +197,7 @@ public class TimeRangePreference extends Preference {
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+    protected void onSetInitialValue(Object defaultValue) {
         SharedPreferences sharedPreferences = getSharedPreferences();
         int startInMinutes = sharedPreferences.getInt(keyStartInMinutes, -1);
         int endInMinutes = sharedPreferences.getInt(keyEndInMinutes, -1);

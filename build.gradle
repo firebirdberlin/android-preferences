@@ -6,12 +6,14 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.5.1'
     }
 }
 
 dependencies {
     implementation fileTree(include: '*.jar', dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.preference:preference:1.1.0'
 }
 
 android {
@@ -42,6 +44,6 @@ android {
         release.setRoot('build-types/release')
     }
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
     }
 }

@@ -2,11 +2,10 @@ package de.firebirdberlin.preference;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
-import android.preference.Preference;
 import android.util.AttributeSet;
+
+import androidx.preference.Preference;
 
 public class AppDetailsPreference extends Preference {
 
