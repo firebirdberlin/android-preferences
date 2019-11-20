@@ -92,8 +92,6 @@ public class TimeRangePreference extends Preference {
     }
 
     private void setValuesFromXml(AttributeSet attrs) {
-        mContext = getContext();
-
         Resources res = mContext.getResources();
         String packageName = mContext.getPackageName();
         String res_label_start_text = getAttributeStringValue(attrs, TIMERANGE, "start_text", "start time");
@@ -143,9 +141,13 @@ public class TimeRangePreference extends Preference {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        // Bug Android 4.1: Dialog is submitted twice
+                        // >> ignore second call to this method.
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
+                                && !timePicker.isShown()) return;
+
                         updateTime(startTime, selectedHour, selectedMinute);
                         showDialogEndTime();
-
                     }
                 },
                 startTime.hour, startTime.min, DateFormat.is24HourFormat(mContext)
@@ -159,6 +161,10 @@ public class TimeRangePreference extends Preference {
         mTimePicker = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                // Bug Android 4.1: Dialog is submitted twice
+                // >> ignore second call to this method.
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
+                        && !timePicker.isShown()) return;
                 updateTime(endTime, selectedHour, selectedMinute);
             }
         }, endTime.hour, endTime.min, DateFormat.is24HourFormat(mContext));
