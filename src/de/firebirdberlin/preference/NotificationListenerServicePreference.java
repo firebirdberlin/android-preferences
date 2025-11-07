@@ -14,16 +14,10 @@ public class NotificationListenerServicePreference extends Preference {
 
         final Context ctx = context;
         setOnPreferenceClickListener(
-                new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        if (Build.VERSION.SDK_INT >= 18) {
-                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                            ctx.startActivity(intent);
-                            return true;
-                        }
-                        return false;
-                    }
+                preference -> {
+                    Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                    ctx.startActivity(intent);
+                    return true;
                 }
         );
     }

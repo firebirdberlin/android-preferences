@@ -10,6 +10,7 @@ import android.view.ViewParent;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -63,7 +64,7 @@ public class InlineSeekBarPreference extends Preference implements SeekBar.OnSee
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         View ret = holder.itemView;
 

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceDialogFragmentCompat;
 
 
@@ -33,7 +34,7 @@ public class SeekBarPreferenceDialogFragment extends PreferenceDialogFragmentCom
     }
 
     @Override
-    protected void onPrepareDialogBuilder(androidx.appcompat.app.AlertDialog.Builder builder) {
+    protected void onPrepareDialogBuilder(@NonNull androidx.appcompat.app.AlertDialog.Builder builder) {
         super.onPrepareDialogBuilder(builder);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -45,7 +46,7 @@ public class SeekBarPreferenceDialogFragment extends PreferenceDialogFragmentCom
     }
 
     @Override
-    protected View onCreateDialogView(Context context) {
+    protected View onCreateDialogView(@NonNull Context context) {
         //return super.onCreateDialogView(context);
         LinearLayout.LayoutParams params;
         LinearLayout layout = new LinearLayout(context);
@@ -78,7 +79,7 @@ public class SeekBarPreferenceDialogFragment extends PreferenceDialogFragmentCom
     }
 
     @Override
-    protected void onBindDialogView(View v) {
+    protected void onBindDialogView(@NonNull View v) {
         super.onBindDialogView(v);
         mSeekBar.setMax(preference.mMax);
         mSeekBar.setProgress(preference.mValue);

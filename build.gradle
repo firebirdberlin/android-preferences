@@ -6,18 +6,19 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.3'
+        classpath 'com.android.tools.build:gradle:8.13.0'
     }
 }
 
 dependencies {
     implementation fileTree(include: '*.jar', dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.preference:preference:1.2.1'
 }
 
 android {
     namespace 'de.firebirdberlin.preference'
+    compileSdk 35
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -42,8 +43,8 @@ android {
         release.setRoot('build-types/release')
     }
     defaultConfig {
-        compileSdk 34
-        minSdkVersion 14
+        targetSdk 35
+        minSdkVersion 21
     }
     buildFeatures {
         renderScript true

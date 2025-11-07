@@ -2,15 +2,15 @@ package de.firebirdberlin.preference;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.content.res.Resources;
 import android.content.SharedPreferences;
-import android.os.Build;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
@@ -121,7 +121,7 @@ public class TimeRangePreference extends Preference {
     }
 
     @Override
-    protected void onAttachedToHierarchy(PreferenceManager preferenceManager) {
+    protected void onAttachedToHierarchy(@NonNull PreferenceManager preferenceManager) {
         super.onAttachedToHierarchy(preferenceManager);
         setSummary(getSummary());
     }
@@ -138,17 +138,13 @@ public class TimeRangePreference extends Preference {
     public void onClick() {
         TimePickerDialog mTimePicker = new TimePickerDialog(
                 mContext,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        // Bug Android 4.1: Dialog is submitted twice
-                        // >> ignore second call to this method.
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-                                && !timePicker.isShown()) return;
+                (timePicker, selectedHour, selectedMinute) -> {
+                    // Bug Android 4.1: Dialog is submitted twice
+                    // >> ignore second call to this method.
+                    if (!timePicker.isShown()) return;
 
-                        updateTime(startTime, selectedHour, selectedMinute);
-                        showDialogEndTime();
-                    }
+                    updateTime(startTime, selectedHour, selectedMinute);
+                    showDialogEndTime();
                 },
                 startTime.hour, startTime.min, DateFormat.is24HourFormat(mContext)
         );
@@ -163,8 +159,7 @@ public class TimeRangePreference extends Preference {
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 // Bug Android 4.1: Dialog is submitted twice
                 // >> ignore second call to this method.
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-                        && !timePicker.isShown()) return;
+                if (!timePicker.isShown()) return;
                 updateTime(endTime, selectedHour, selectedMinute);
             }
         }, endTime.hour, endTime.min, DateFormat.is24HourFormat(mContext));
@@ -178,8 +173,7 @@ public class TimeRangePreference extends Preference {
          * https://code.google.com/p/android/issues/detail?id=201766
          */
         int orientation = mContext.getResources().getConfiguration().orientation;
-        if (Build.VERSION.SDK_INT > 19
-                && orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             dialog.setTitle("");
         } else {
             dialog.setTitle(title);

@@ -11,8 +11,6 @@ public class SeekBarPreference extends DialogPreference {
     private static final String androidns = "http://schemas.android.com/apk/res/android";
     private static final String seekbar = "seekbar";
 
-    private Context mContext;
-
     protected String mDialogMessage, mSuffix;
     protected int mDefault, mMax, mValue = 0;
     protected int mStep = 1;
@@ -21,7 +19,6 @@ public class SeekBarPreference extends DialogPreference {
     public SeekBarPreference(Context context, AttributeSet attrs) {
 
         super(context,attrs);
-        mContext = context;
         // Get string value for dialogMessage
         int mDialogMessageId = attrs.getAttributeResourceValue(androidns, "dialogMessage", 0);
 
@@ -29,7 +26,7 @@ public class SeekBarPreference extends DialogPreference {
             mDialogMessage = attrs.getAttributeValue(androidns, "dialogMessage");
         }
         else {
-            mDialogMessage = mContext.getString(mDialogMessageId);
+            mDialogMessage = context.getString(mDialogMessageId);
         }
 
         // Get string value for suffix (text attribute in xml file) :
@@ -39,7 +36,7 @@ public class SeekBarPreference extends DialogPreference {
             mSuffix = attrs.getAttributeValue(androidns, "text");
         }
         else {
-            mSuffix = mContext.getString(mSuffixId);
+            mSuffix = context.getString(mSuffixId);
         }
 
         // Get default and max seekbar values :

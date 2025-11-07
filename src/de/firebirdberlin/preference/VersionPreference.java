@@ -17,7 +17,7 @@ public class VersionPreference extends Preference {
             String version = pInfo.versionName;
             CharSequence title = getTitle();
             if ( title != null ) {
-                setTitle(title.toString() + " v" + version);
+                setTitle(title + " v" + version);
             } else {
                 setTitle(pInfo.packageName + " v" + version);
             }

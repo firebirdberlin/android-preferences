@@ -14,16 +14,13 @@ public class AppDetailsPreference extends Preference {
 
         final Context ctx = context;
         setOnPreferenceClickListener(
-                new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        Intent intent = new Intent();
-                        intent.setAction(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", ctx.getPackageName(), null);
-                        intent.setData(uri);
-                        ctx.startActivity(intent);
-                        return true;
-                    }
+                preference -> {
+                    Intent intent = new Intent();
+                    intent.setAction(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", ctx.getPackageName(), null);
+                    intent.setData(uri);
+                    ctx.startActivity(intent);
+                    return true;
                 }
         );
     }

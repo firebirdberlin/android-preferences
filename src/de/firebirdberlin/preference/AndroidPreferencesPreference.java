@@ -37,12 +37,9 @@ public class AndroidPreferencesPreference extends Preference {
         }
         final Context ctx = context;
         setOnPreferenceClickListener(
-                new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        ctx.startActivity(intent);
-                        return true;
-                    }
+                preference -> {
+                    ctx.startActivity(intent);
+                    return true;
                 }
         );
     }
