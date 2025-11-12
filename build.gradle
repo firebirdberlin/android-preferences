@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.0'
+        classpath 'com.android.tools.build:gradle:8.13.1'
     }
 }
 
@@ -18,7 +18,7 @@ dependencies {
 
 android {
     namespace 'de.firebirdberlin.preference'
-    compileSdk 35
+    compileSdk 36
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -43,8 +43,8 @@ android {
         release.setRoot('build-types/release')
     }
     defaultConfig {
-        targetSdk 35
-        minSdkVersion 21
+        targetSdk 36
+        minSdkVersion 23
     }
     buildFeatures {
         renderScript true
