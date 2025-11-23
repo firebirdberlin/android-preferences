@@ -41,21 +41,40 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
 }
 
+
 publishing {
     publications {
-        create("release", MavenPublication) {
+        release(MavenPublication) {
             groupId = "com.github.firebirdberlin"
             artifactId = "android-preferences"
-            version = "36.0.2"
+            version = "36.0.3"
 
-            // explicitly attach the release AAR
-            artifact("$buildDir/outputs/aar/preferences-release.aar")
+            // POM metadata
+            pom {
+                name = 'Android Preferences Library'
+                description = 'A library for Android preferences'
+                url = 'https://github.com/firebirdberlin/android-preferences'
 
-            // optionally, include the pom
-            pom.withXml {
-                // extra pom config if needed
+                licenses {
+                    license {
+                        name = 'GNU General Public License v3.0'
+                        url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+                        distribution = 'manual'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'firebirdberlin'
+                        name = 'Stefan Fruhner'
+                        email = 'stefan.fruhner@googlemail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/firebirdberlin/android-preferences.git'
+                    developerConnection = 'scm:git:ssh://github.com/firebirdberlin/android-preferences.git'
+                    url = 'https://github.com/firebirdberlin/android-preferences'
+                }
             }
         }
     }
 }
-
