@@ -46,7 +46,7 @@ publishing {
         create("release", MavenPublication) {
             groupId = "com.github.firebirdberlin"
             artifactId = "android-preferences"
-            version = "36.0.1"
+            version = "36.0.2"
 
             // explicitly attach the release AAR
             artifact("$buildDir/outputs/aar/preferences-release.aar")
