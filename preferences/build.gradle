@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.library' version '8.13.1'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'de.firebirdberlin.preference'
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 36
+    }
+
+    buildTypes {
+        release {
+            // Optional: enable ProGuard / R8 if needed
+            minifyEnabled false
+        }
+        debug {}
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+
+    buildFeatures {
+        aidl true
+        renderScript false
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.preference:preference:1.2.1'
+}
+
+publishing {
+    publications {
+        create("release", MavenPublication) {
+            groupId = "com.github.firebirdberlin"
+            artifactId = "android-preferences"
+            version = "36.0.1"
+
+            // explicitly attach the release AAR
+            artifact("$buildDir/outputs/aar/preferences-release.aar")
+
+            // optionally, include the pom
+            pom.withXml {
+                // extra pom config if needed
+            }
+        }
+    }
+}
+
