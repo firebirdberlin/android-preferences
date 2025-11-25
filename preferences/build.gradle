@@ -14,25 +14,26 @@ android {
 
     buildTypes {
         release {
-            // Optional: enable ProGuard / R8 if needed
             minifyEnabled false
         }
-        debug {}
     }
 
-    sourceSets {
-        main {
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-            java.srcDirs = ['src/main/java']
-            res.srcDirs = ['src/main/res']
-            assets.srcDirs = ['src/main/assets']
-            jniLibs.srcDirs = ['src/main/libs']
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // This block correctly tells AGP to create a component for publishing.
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
         }
     }
+}
 
-    buildFeatures {
-        aidl true
-        renderScript false
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -41,20 +42,17 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
 }
 
-
 publishing {
     publications {
         release(MavenPublication) {
             groupId = "com.github.firebirdberlin"
             artifactId = "android-preferences"
-            version = "36.0.3"
+            version = "36.0.5"
 
-            // POM metadata
             pom {
                 name = 'Android Preferences Library'
                 description = 'A library for Android preferences'
                 url = 'https://github.com/firebirdberlin/android-preferences'
-
                 licenses {
                     license {
                         name = 'GNU General Public License v3.0'
@@ -76,5 +74,13 @@ publishing {
                 }
             }
         }
+    }
+}
+
+// This block runs at the end of the configuration phase and connects
+// the publication to the component created by the Android Gradle Plugin.
+afterEvaluate {
+    publishing.publications.getByName("release") {
+        from components.release
     }
 }

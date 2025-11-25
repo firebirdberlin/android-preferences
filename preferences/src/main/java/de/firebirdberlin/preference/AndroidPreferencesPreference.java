@@ -18,10 +18,6 @@ public class AndroidPreferencesPreference extends Preference {
         final Intent intent;
         switch (which) {
             case "NotificationListener":
-                if (Build.VERSION.SDK_INT < 18) {
-                    setVisible(false);
-                    setEnabled(false);
-                }
                 intent = new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS);
                 break;
             case "Sound":

@@ -15,5 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "android-preferences"
 include(":preferences")
-
-
